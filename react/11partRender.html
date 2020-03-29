@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <script src="node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+
+    class Com extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                showState: true
+            };
+        }
+
+        func() {
+            this.setState({showState: !this.state.showState});
+        }
+
+        render() {
+            let text;
+            if (this.state.showState) {
+                text = 'xxx';
+            } else {
+                text = 'yyy';
+            }
+            return (
+                <div>
+                    我是组件
+                    <button onClick={this.func.bind(this)}>按钮</button>
+                    {text}
+                </div>
+            );
+        }
+    }
+
+    function render() {
+        ReactDOM.render(<Com/>, document.getElementById('hello'));
+    }
+
+    render();
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>practice</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <script src="node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+
+    let SubCom = (props) => {
+        return (
+            <div style={{display: props.visible ? 'block' : 'none'}}>子组件{props.arr.map((v, i) => {
+                return <h1 key={i}>{v}</h1>;
+            })}</div>
+        );
+    };
+    let showSub = true;
+    let arr = ['a', 'b', 'c'];
+    let Com = (props) => {
+        return (
+            <div><h1 onClick={() => {
+                showSub = !showSub;
+                console.log(showSub);
+                render();
+            }}>字母列表</h1>
+                <SubCom arr={arr} visible={showSub}/></div>
+        );
+    };
+
+    function render() {
+        ReactDOM.render(<Com/>, document.getElementById('hello'));
+    }
+
+    render();
+</script>
+</body>
+</html>

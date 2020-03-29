@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+    let myDom= <h1>你好</h1>;
+    ReactDOM.render(myDom,document.getElementById("hello"));
+</script>
+</body>
+</html>

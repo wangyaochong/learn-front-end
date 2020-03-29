@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+   <style>
+       .font{
+           font: 20px bold;
+       }
+   </style>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+    let style = {
+        background: 'red'
+    };
+    let url = 'http://www.baidu.com';
+    let myDom = <a style={style} href={url} className="font">你好</a>;
+    ReactDOM.render(myDom, document.getElementById('hello'));
+</script>
+</body>
+</html>

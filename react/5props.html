@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+    class MyCom extends React.Component{
+        render(){
+            return (
+                <h1>类组件{this.props.text},{this.props.name},{this.props.age}</h1>
+            )
+        }
+    }
+
+    let data = '你好';
+    let obj = {
+        name: 'abc', age: 18, sex: 'boy'
+    };
+    ReactDOM.render(<MyCom text={data} {...obj}/>,document.getElementById("hello"));
+</script>
+</body>
+</html>

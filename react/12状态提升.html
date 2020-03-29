@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <script src="node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+    class DemoA extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+
+        render() {
+            return (
+                <div>我是第一个组件{this.props.text}</div>
+            );
+        }
+    }
+
+    class DemoB extends React.Component {
+        constructor(props) {
+            super(props);
+        }
+
+        render() {
+            return (
+                <div>我是第二个组件{this.props.text}</div>
+            );
+        }
+    }
+
+    class Com extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {text: '-默认值'};
+        }
+
+        fun = () => {
+            this.setState({text: 'sss'});
+        };
+
+        render() {
+            return (
+                <div>
+                    <DemoA text={this.state.text}/>
+                    <DemoB text={this.state.text}/>
+                    <button onClick={this.fun}>press</button>
+                </div>
+            );
+        }
+    }
+
+
+    function render() {
+        ReactDOM.render(<Com/>, document.getElementById('hello'));
+    }
+
+    render();
+</script>
+</body>
+</html>

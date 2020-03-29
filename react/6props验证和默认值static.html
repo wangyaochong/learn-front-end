@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <script src="node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+    class MyCom extends React.Component {
+        static defaultProps = {
+            name: 'default', age: 0, sex: 'boy', text: 'text'
+        };
+        static propTypes = {
+            name: PropTypes.number,
+            age: PropTypes.number.isRequired
+        };
+
+        render() {
+            return (
+                <h1>类组件{this.props.text},{this.props.name},{this.props.age}</h1>
+            );
+        }
+    }
+
+    ReactDOM.render(<MyCom name="abc"/>, document.getElementById('hello'));
+</script>
+</body>
+</html>

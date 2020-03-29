@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <script src="node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+
+    class Com extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {name: 'name', inHtml: '<h1>inHtml</h1>'};
+        }
+
+        setName = () => {
+            this.setState({name: 'test'}, () => {
+                console.log('callback', this.state.name);
+            });
+            console.log(this.state.name);
+        };
+
+        render() {
+            return (
+                <div onClick={this.setName}>{this.state.name}
+                    <div dangerouslySetInnerHTML={{__html: this.state.inHtml}}></div>
+                </div>
+            );
+        }
+    }
+
+    function render() {
+        ReactDOM.render(<Com/>, document.getElementById('hello'));
+    }
+
+    render();
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+    let arr = ['吃饭', '睡觉', '豆豆'];
+
+    let myDom = arr.map((item, index, arr) => {
+        return (<p key={index}>{item},{index},{arr}</p>);
+    });
+
+    /*
+     for (let index in arr) {
+     content.push((<p key={index}>{arr[index]},{arr}</p>));
+     }*/
+
+    let target = -1;
+
+    function makeContent() {
+        let content = [];
+        arr.forEach(function (item, index, arr) {
+            content.push((<p key={index} style={{color: target == index ? 'red' : ''}} onClick={
+                function () {
+                    target = index;
+                    console.log(target, index);
+                    render();
+                }
+            }>{arr[index]},{arr}</p>));
+        });
+        return content;
+    }
+
+
+    render();
+
+    function render() {
+        ReactDOM.render(makeContent(), document.getElementById('hello'));
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <script src="node_modules/prop-types/prop-types.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+
+<script type="text/babel">
+
+    class Com extends React.Component {
+        constructor(props) {
+            super(props);
+            this.myRef = React.createRef();
+            this.funPreBind = this.funPreBind.bind(this);
+        }
+
+        funPreBind() {
+            console.log(this.myRef.current.value);
+        }
+
+        func = () => {
+            console.log(this.refs.typeString.value);
+        };
+        func2 = () => {
+            console.log(this.textInput.value);
+        };
+        func3 = () => {
+            console.log(this.myRef.current.value);
+        };
+
+        render() {
+            return (
+                <div>
+                    <label>
+                        字符串方式<input type="text" ref="typeString"/>
+                    </label>
+                    <button onClick={this.func}>查看typeString输入数据</button>
+                    <label>
+                        方法方式<input type="text" ref={(input) => {
+                        this.textInput = input;
+                    }}/>
+                    </label>
+                    <button onClick={this.func2}>查看typeMethod输入数据</button>
+
+                    <label>
+                        createRef方式<input type="text" ref={this.myRef}/>
+                    </label>
+                    <button onClick={this.funPreBind}>查看createRef方式输入数据</button>
+                </div>
+            );
+        }
+    }
+
+    function render() {
+        ReactDOM.render(<Com/>, document.getElementById('hello'));
+    }
+
+    render();
+</script>
+</body>
+</html>
