@@ -7,6 +7,9 @@ import rootReducer from './redux/rootReducer';
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+
 // const logger = store => next => action => {
 //     console.log('dispatch->', action);
 //     let result = next(action);
@@ -24,7 +27,9 @@ import thunk from 'redux-thunk';
 
 
 // const store = createStore(rootReducer, {}, applyMiddleware(logger, error));
-const store = createStore(rootReducer, {}, applyMiddleware(logger,thunk));
+
+const composeEnhancers=composeWithDevTools({});
+const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(logger, thunk)));
 store.subscribe(() => {
     console.log('state', store.getState());
     render();
@@ -33,7 +38,7 @@ store.subscribe(() => {
 
 function render() {
     ReactDOM.render(
-        <Provider store={store}>
+        <Provider store={ store }>
             <App/>
         </Provider>
         ,

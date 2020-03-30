@@ -1,6 +1,11 @@
 import * as actions from '../actions';
 
-const user = (state = {}, action) => {
+let initState = {
+    user: {},
+    error: null,
+    isFetching: false
+};
+const user = (state = initState, action) => {
     switch (action.type) {
         case actions.userRequestSuccess:
             return {
