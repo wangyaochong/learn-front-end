@@ -7,6 +7,10 @@ import Phone from './components/Phone';
 import News from './components/News';
 import {withRouter} from 'react-router';
 import MyRedux from './components/MyRedux';
+import SetStateDemo from './components/SetStateDemo';
+import IfDemo from './components/IfDemo';
+import FormDemo from './components/FormDemo';
+import RefsForm from './components/RefsForm';
 
 function App(props) {
     let [valNum, setValNum] = useState(0);
@@ -22,6 +26,10 @@ function App(props) {
         <div className="App">
 
             <div>
+                <RefsForm/>
+                <FormDemo/>
+                <IfDemo/>
+                <SetStateDemo/>
                 <MyRedux/>
                 <div>使用stateNum={valNum}</div>
                 <div>使用state={val.a}</div>

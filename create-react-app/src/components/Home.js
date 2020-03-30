@@ -26,8 +26,8 @@ class Home extends Component {
                     你好我是组件{Math.random() * 10}
                 </div>
                 <div>第二个标签</div>
-                <img src="medicine.jpeg" alt=""/>
-                <img src={require('../assets/medicine.jpeg')} alt=""/>
+                <img src="tree.png" alt=""/>
+                <img src={require('../assets/tree.png')} alt=""/>
                 <button onClick={this.ajaxFun}>点击获取服务器数据</button>
             </Fragment>
         );
