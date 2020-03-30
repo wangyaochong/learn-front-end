@@ -1,5 +1,4 @@
 import * as actions from '../actions';
-
 export function userRequestSuccess(user) {
     return {
         type: actions.userRequestSuccess,
@@ -25,10 +24,16 @@ export function userRequestError(error) {
 export const getUser = () => {
     return dispatch => {
         dispatch(userRequestWaiting({}));
-        fetch('/api/list').then(res => res.json())
-            .then(data => {
-                dispatch(userRequestSuccess(data[0]));
-            }).catch(e => {
+        fetch('/api/list').then((res) => {
+            let ok = res.ok;
+            if (ok) {
+                res.json().then(data => {
+                    dispatch(userRequestSuccess(data[0]));
+                });
+            } else {
+                dispatch(userRequestError(res.status));
+            }
+        }).catch(e => {
             dispatch(userRequestError(e));
             console.log(e);
         });
