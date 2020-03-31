@@ -15,7 +15,8 @@ import Parent from './components/coms/Parent';
 import { connect } from 'react-redux';
 import * as counterAction from './redux/actions/counter';
 import { bindActionCreators } from 'redux';
-import User from './components/User';
+import ReduxPage from './pages/ReduxPage';
+import ReduxPage2 from './pages/ReduxPage2';
 
 class App extends React.Component {
     render() {
@@ -23,55 +24,52 @@ class App extends React.Component {
         console.log(this.props);
         return (
             <div className="container">
-                <div className={"text-center"}>
-                    {/*这个是使用原生redux的路由*/}
-                    {/*<h1 className={'jumbotron-heading text-center'}>{this.props.value}</h1>*/}
-                    {/*<p className={'text-center'}>*/}
-                    {/*    <button className={'btn btn-primary'} onClick={this.props.onAdd}>+</button>*/}
-                    {/*    <button className={'btn btn-success'} onClick={this.props.onSub}>-</button>*/}
-                    {/*</p>*/}
 
-                    <h1 className={'jumbotron-heading text-center'}>{this.props.counter}</h1>
-                    {/*<button className={'btn btn-primary'} onClick={this.props.add}>+</button>*/}
-                    {/*<button className={'btn btn-success'} onClick={this.props.sub}>-</button>      */}
-                    <button className={'btn btn-primary'} onClick={this.props.counterAction.add.bind(this, 5)}>+</button>
-                    <button className={'btn btn-success'} onClick={this.props.counterAction.sub.bind(this, 5)}>-</button>
-                    <User/>
-                </div>
-
-
-                <Parent/>
                 <Router>
-                    <Button type="link"><NavLink to={{
+                    <Button type="link"><NavLink to={ {
                         pathname: '/mine',
                         search: '?sort=name',
                         hash: '#mine',
                         state: {
                             fromDashBoard: 'bbb'//隐性参数传递
                         }
-                    }}>mine</NavLink></Button>
+                    } }>mine</NavLink></Button>
+                    <Button type="link">
+                        <NavLink to={"/parent"}>parent</NavLink>
+                    </Button>
+
                     <Switch>
                         <Redirect from="/xxxMine" to="mine"/>
-                        {/*<Route path="/book" component={Book}>*/}
-                        <Book>
-                            <Switch>
-                                <Route path="/book/java"><BookJava/></Route>
-                                <Route path="/book/web"><BookWeb/></Route>
-                                <Route/>
-                            </Switch>
-                        </Book>
-
-                        {/*</Route>*/}
-                        <Route path="/shop" component={Shop}/>
-                        <Route path="/home" component={Home} exact={true} strict={true}/>
-                        <Route path="/mine/:param" component={Mine}/>
-                        <Route path="/mine" component={Mine}/>
-                        <Route path="/nm" render={() => {
+                        {/*<Route path="/book" component={Book}/>*/ }
+                        <Route path={ '/book' }>
+                            <Book>
+                                <Switch>
+                                    <Route path="/book/java"><BookJava/></Route>
+                                    <Route path="/book/web"><BookWeb/></Route>
+                                    <Route/>
+                                </Switch>
+                            </Book>
+                        </Route>
+                        {/*</Route>*/ }
+                        <Route path={"/reduxPage"} component={()=>{
+                            return (
+                                <div>
+                                    <ReduxPage/>
+                                    <ReduxPage2/>
+                                </div>
+                            )
+                        }}/>
+                        <Route path="/parent" component={ Parent }/>
+                        <Route path="/shop" component={ Shop }/>
+                        <Route path="/home" component={ Home } exact={ true } strict={ true }/>
+                        <Route path="/mine/:param" component={ Mine }/>
+                        <Route path="/mine" component={ Mine }/>
+                        <Route path="/nm" render={ () => {
                             return (<h1>匿名Route</h1>);
-                        }}/>
-                        <Route path="/nmMine" render={() => {
-                            return (<h1>{<Mine/>}</h1>);
-                        }}/>
+                        } }/>
+                        <Route path="/nmMine" render={ () => {
+                            return (<h1>{ <Mine/> }</h1>);
+                        } }/>
                         <Route path="/other" render={
                             () => {
                                 return (
@@ -88,10 +86,9 @@ class App extends React.Component {
                                 );
                             }
                         }/>
-                        <Route component={NotFound}/>
+                        <Route component={ NotFound }/>
                     </Switch>
                 </Router>
-
             </div>
         );
     }

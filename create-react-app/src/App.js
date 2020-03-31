@@ -13,6 +13,7 @@ import FormDemo from './components/FormDemo';
 import RefsForm from './components/RefsForm';
 
 function App(props) {
+    //hook，在不使用class的情况下也可以使用state
     let [valNum, setValNum] = useState(0);
     let [val, setVal] = useState({
         a:"a",
