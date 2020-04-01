@@ -17,6 +17,8 @@ import * as counterAction from './redux/actions/counter';
 import { bindActionCreators } from 'redux';
 import ReduxPage from './pages/ReduxPage';
 import ReduxPage2 from './pages/ReduxPage2';
+import SagaPage from './pages/saga/SagaPage';
+import axios from 'axios';
 
 class App extends React.Component {
     render() {
@@ -24,7 +26,7 @@ class App extends React.Component {
         console.log(this.props);
         return (
             <div className="container">
-
+                <SagaPage/>
                 <Router>
                     <Button type="link"><NavLink to={ {
                         pathname: '/mine',
@@ -35,7 +37,7 @@ class App extends React.Component {
                         }
                     } }>mine</NavLink></Button>
                     <Button type="link">
-                        <NavLink to={"/parent"}>parent</NavLink>
+                        <NavLink to={ '/parent' }>parent</NavLink>
                     </Button>
 
                     <Switch>
@@ -51,14 +53,14 @@ class App extends React.Component {
                             </Book>
                         </Route>
                         {/*</Route>*/ }
-                        <Route path={"/reduxPage"} component={()=>{
+                        <Route path={ '/reduxPage' } component={ () => {
                             return (
                                 <div>
                                     <ReduxPage/>
                                     <ReduxPage2/>
                                 </div>
-                            )
-                        }}/>
+                            );
+                        } }/>
                         <Route path="/parent" component={ Parent }/>
                         <Route path="/shop" component={ Shop }/>
                         <Route path="/home" component={ Home } exact={ true } strict={ true }/>
@@ -77,6 +79,9 @@ class App extends React.Component {
                                         <Fetch/>
                                         <ProxyDemo/>
                                         <div>
+                                            <Button onClick={()=> axios.get("/login").then(res=>{
+                                                console.log(res);
+                                            }) }>login</Button>
                                             <Button type="primary">Primary</Button>
                                             <Button>Default</Button>
                                             <Button type="dashed">Dashed</Button>

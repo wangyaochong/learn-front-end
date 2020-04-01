@@ -8,8 +8,8 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-
+import createSagaMiddleWare from 'redux-saga';
+import { defSaga } from './pages/saga/Saga';
 // const logger = store => next => action => {
 //     console.log('dispatch->', action);
 //     let result = next(action);
@@ -25,13 +25,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 //     }
 // };
 
-
 // const store = createStore(rootReducer, {}, applyMiddleware(logger, error));
-
-const composeEnhancers=composeWithDevTools({});
-const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(logger, thunk)));
+const sagaMiddleWare = createSagaMiddleWare();
+const composeEnhancers = composeWithDevTools({});
+// const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(logger, thunk, sagaMiddleWare)));
+const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(thunk, sagaMiddleWare)));
+sagaMiddleWare.run(defSaga);
 store.subscribe(() => {
-    console.log('state', store.getState());
+    // console.log('state', store.getState());
     render();
 });
 
